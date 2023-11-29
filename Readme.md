@@ -10,4 +10,9 @@
     > git config user.email
 - ellenörzés(van e különbség a heliy és a repo közt?)
     > git status
-- előkészítjük a commit-ra, minden vá
+- előkészítjük a commit-ra, minden változást eltárolunk
+    > git add .
+- ellenörzés:
+    >git status
+- eltárolása au újabb verziónak:
+    > git commit -m "first"
