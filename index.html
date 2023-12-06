@@ -32,19 +32,19 @@
             background-color: rgba(13, 143, 13, 0.6);
             padding: 5px;
             border-radius: 10px;
-        }
-        .cardkep {
-            max-height: 300px;
-            object-fit: cover;
-        }
-        .fullkep {
-            max-height: 100vh;
-            object-fit: contain;
+        }   
+        img{
+            height: 400px;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <dialog class="modal">
+            <img class="kep" src="" alt="">
+            <p class="szoveg"></p>
+            <button class="bezar">Bezár</button>
+        </dialog>
         <header>
             <h1 class="borderes">Arany napfény utazási iroda</h1>
         </header>
@@ -68,31 +68,31 @@
         function renderTours(data){
             const ide = document.getElementById("ide");
             ide.innerHTML = "";
-            data.forEach((obj, index)=>{
+            data.forEach((obj)=>{
                 ide.innerHTML += `
                 <div class="col-md-12">
-                    <div class="card mb-4" style="width: 100%;">
-                        <img src="${obj.image}" class="cardkep img-fluid" alt="...">
+                    <div class="card mb-4">
+                        <img class="kep" src="${obj.image}" class="cardkep img-fluid" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">${obj.name}</h5>
-                            <button class="btn btn-primary" onclick="leirasos('${obj.info}', '${obj.image}', ${index})">More info</button>
-                            <p class="leiras" id="leiras-${index}"></p>
-                            <img class="full-image d-none" src="" alt="Full Image">
+                            <button class="btn btn-primary" onclick="showModal(event)" data-image="${obj.image}" data-info="${obj.info}">More info</button>
                         </div>
                     </div>
                 </div>`;
             });     
         }
+        let modal = document.querySelector('.modal')
+        function showModal(e){
+            let kep = document.querySelector('.kep')
+            let szoveg = document.querySelector('.szoveg')
+            kep.src = e.target.dataset.image
+            szoveg.innerHTML = e.target.dataset.info
 
-        function leirasos(info, kepes, index){
-            const leiras = document.getElementById(`leiras-${index}`);
-            const fullkep = document.querySelector(".fullkep");
-
-            leiras.innerHTML = info;
-
-            fullkep.src = kepes;
-            fullkep.classList.toggle("display: none;");
         }
+        document.querySelector('.bezar').addEventListener('click', () => {
+            modal.close()
+        })
+
     </script>
     
 </body>
